@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 14:40:52 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/05 16:17:11 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/05 20:29:39 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,7 @@ t_pipex	*prepare_pipex(int ac, char **av, char **env)
 	pipex = init_pipex();
 	get_env_paths(pipex, env);
 	print_paths(pipex);
+	check_format(pipex, av);
+	check_commands(pipex);
 	return (pipex);
 }

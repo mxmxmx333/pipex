@@ -6,13 +6,13 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 16:25:54 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/05 16:38:43 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/05 20:04:12 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(char c)
+static int	ft_is_white(char c)
 {
 	return (c == ' ' || c == '\t' || c == '\n');
 }
@@ -47,10 +47,10 @@ int ft_countwords_whitespace(char const *s)
 	i = 0;
 	while (s[i])
 	{
-		if (!ft_isspace(s[i]))
+		if (!ft_is_white(s[i]))
 		{
 			words++;
-			while (s[i] && !ft_isspace(s[i]))
+			while (s[i] && !ft_is_white(s[i]))
 				i++;
 		}
 		else
@@ -79,9 +79,9 @@ int	ft_isoneword_whitespace(char const *s)
 	int	i;
 
 	i = -1;
-	while (s[++i] && !ft_isspace(s[i]))
+	while (s[++i] && !ft_is_white(s[i]))
 	{
-		if (ft_isspace(s[i]))
+		if (ft_is_white(s[i]))
 			return (0);
 	}
 	return (i);

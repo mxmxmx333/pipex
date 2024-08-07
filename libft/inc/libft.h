@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 11:19:21 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/05 16:39:05 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/05 20:02:57 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *str1, char const *str2);
+char	*ft_strjoin_three(char *s1, char *s2, char *s3);
 char	*ft_strtrim(char const *str, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);

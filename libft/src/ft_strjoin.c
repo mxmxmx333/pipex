@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:09:15 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/04/21 15:22:10 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/05 20:02:15 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,24 @@ char	*ft_strjoin(const char *str1, char const *str2)
 	ft_strlcpy(joined, str1, totallen * sizeof(char));
 	ft_strlcat(joined, str2, totallen * sizeof(char));
 	return (joined);
+}
+
+char	*ft_strjoin_three(char *s1, char *s2, char *s3)
+{
+	int		len;
+	char	*res;
+
+	if (!s1 || !s2 || !s3)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3);
+	res = (char *)ft_calloc(len + 1, sizeof(char));
+	if (!res)
+		return (NULL);
+	while (*s1)
+		*res++ = *s1++;
+	while (*s2)
+		*res++ = *s2++;
+	while (*s3)
+		*res++ = *s3++;
+	return (res - len);
 }

@@ -6,7 +6,7 @@
 #    By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/05 10:57:59 by mbonengl          #+#    #+#              #
-#    Updated: 2024/08/05 15:15:14 by mbonengl         ###   ########.fr        #
+#    Updated: 2024/08/05 20:24:59 by mbonengl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC 		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/errors.c \
 				$(SRC_DIR)/init.c \
 				$(SRC_DIR)/deallocate.c \
-				$(SRC_DIR)/testing.c
+				$(SRC_DIR)/testing.c \
+				$(SRC_DIR)/check_files.c
 OBJ 		:= 	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(Name)

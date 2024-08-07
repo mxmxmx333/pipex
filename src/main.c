@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:51:04 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/05 16:33:17 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/05 19:38:28 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void	read_pipex(t_pipex *pipex)
 {
-	printf("cmd1: %p\n", pipex->cmd1);
-	printf("cmd2: %p\n", pipex->cmd2);
-	printf("inf: %p\n", pipex->inf);
-	printf("outf: %p\n", pipex->outf);
+	printf("cmd1: %s\n", pipex->cmd1);
+	printf("cmd2: %s\n", pipex->cmd2);
+	printf("inf: %s\n", pipex->inf);
+	printf("outf: %s\n", pipex->outf);
 }
 
 int main(int ac, char **av, char **env)
