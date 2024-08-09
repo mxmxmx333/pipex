@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"errors.h": "c",
-		"array": "c"
+		"array": "c",
+		"cerrno": "c"
 	}
 }
