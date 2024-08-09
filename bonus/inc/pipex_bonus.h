@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:02:26 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/09 11:14:41 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:42:02 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@
 
 typedef struct s_pipex
 {
-	char	**cmd1;
-	char	**cmd2;
+	char	***cmds;
 	char	*inf;
 	char	*outf;
 	char	**paths;
-	char	*p1;
-	char	*p2;
+	char	**cmdpaths;
 }	t_pipex;
 
 /* ----------------- error handling ------------------*/
