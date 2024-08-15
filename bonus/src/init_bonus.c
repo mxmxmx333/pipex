@@ -6,11 +6,11 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 14:40:52 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/09 12:19:39 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:39:34 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 void	get_env_paths(t_pipex *pipex, char **env)
 {
@@ -50,9 +50,10 @@ t_pipex	*prepare_pipex(int ac, char **av, char **env)
 	(void)av;
 	pipex = init_pipex();
 	get_env_paths(pipex, env);
-	input_params(pipex, av);
+	b_input_params(pipex, av, ac);
 	check_files(pipex);
 	check_commands(pipex);
 	ft_putstr_fd("pipex initialized\n", 1);
+	print_pipex_struct(pipex);
 	return (pipex);
 }

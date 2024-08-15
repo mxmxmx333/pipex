@@ -6,24 +6,19 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 11:19:21 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/05 20:02:57 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:58:56 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# include "get_next_line.h"
 # include <unistd.h>/*write*/
 # include <stdio.h>/*size_t*/
 # include <stddef.h>/*NULL*/
 # include <stdlib.h>/*malloc/free*/
 # include <stdint.h>/*SIZE_MAX*/
 # include <limits.h>/*LONG_MAX / LONG MIN*/
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
 
 void	ft_bzero(void *s, size_t n);
 int		ft_isalnum(int c);

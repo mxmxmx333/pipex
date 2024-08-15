@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_files.c                                      :+:      :+:    :+:   */
+/*   check_files_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 16:19:39 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/08 17:57:53 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:41:33 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-int	input_params(t_pipex *pipex, char **av)
+int	b_input_params(t_pipex *pipex, char **av, int ac)
 {
+	int	i;
+
+	i = 1;
+	
 	pipex->inf = ft_strdup(av[1]);
-	pipex->cmd1 = ft_split(av[2], ' ');
-	pipex->cmd2 = ft_split(av[3], ' ');
-	pipex->outf = ft_strdup(av[4]);
-	if (!pipex->inf || !pipex->cmd1 || !pipex->cmd2 || !pipex->outf)
+	pipex->cmds = (char ***)ft_calloc(ac - 2, sizeof(char **));
+	if (!pipex->inf || !pipex->cmds)
+		return (ft_error(pipex, ERR_MALLOC, NULL), 0);
+	while (++i <= ac - 2)
+	{
+		pipex->cmds[i - 2] = ft_split(av[i], ' ');
+		if (!pipex->cmds[i - 2])
+			return (ft_error(pipex, ERR_MALLOC, NULL), 0);
+	}
+	pipex->cmd_p = ft_calloc(ac - 2, sizeof(char *));
+	pipex->outf = ft_strdup(av[ac - 1]);
+	if (!pipex->inf || !pipex->outf || !pipex->cmd_p)
 		return (ft_error(pipex, ERR_MALLOC, NULL), 0);
 	return (1);
 }
@@ -36,7 +48,8 @@ int	check_files(t_pipex *pipex)
 	return (1);
 }
 
-static int	check_commands_2(t_pipex *pipex)
+static int	check_command_path(t_pipex *pipex, char *cmd, int j)
+
 {
 	char	*temp;
 	int		i;
@@ -44,44 +57,33 @@ static int	check_commands_2(t_pipex *pipex)
 	i = -1;
 	while (pipex->paths[++i])
 	{
-		temp = ft_strjoin_three(pipex->paths[i], "/", pipex->cmd2[0]);
+		temp = ft_strjoin_three(pipex->paths[i], "/", cmd);
 		if (access(temp, F_OK) == 0)
 		{
 			if (access(temp, X_OK) == 0)
 			{
-				pipex->p2 = temp;
+				pipex->cmd_p[j] = temp;
 				break ;
 			}
-			else (free(temp), ft_error(pipex, ERR_NO_EXEC, pipex->cmd2[0]), 0);
+			else (free(temp), ft_error(pipex, ERR_NO_EXEC, cmd), 0);
 		}
 		free(temp);
 	}
 	if (!pipex->paths[i])
-		return (ft_error(pipex, ERR_CMD_NOT_FOUND, pipex->cmd2[0]), 0);
+		return (ft_error(pipex, ERR_CMD_NOT_FOUND, cmd), 0);
 	return (1);
 }
 
 int	check_commands(t_pipex *pipex)
 {
-	char	*temp;
-	int		i;
+	int i;
 
 	i = -1;
-	while (pipex->paths[++i])
+	while (pipex->cmds[++i])
 	{
-		temp = ft_strjoin_three(pipex->paths[i], "/", pipex->cmd1[0]);
-		if (access(temp, F_OK) == 0)
-		{
-			if (access(temp, X_OK) == 0)
-			{
-				pipex->p1 = temp;
-				break ;
-			}
-			else (free(temp), ft_error(pipex, ERR_NO_EXEC, pipex->cmd1[0]), 0);
-		}
-		free(temp);
+		if (!check_command_path(pipex, pipex->cmds[i][0], i))
+			return (0);
 	}
-	if (!pipex->paths[i])
-		return (ft_error(pipex, ERR_CMD_NOT_FOUND, pipex->cmd1[0]), 0);
-	return (check_commands_2(pipex));
+	return (1);
 }
+ 

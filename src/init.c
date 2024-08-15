@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 14:40:52 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/08 17:11:03 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:00:06 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ t_pipex	*init_pipex(void)
 t_pipex	*prepare_pipex(int ac, char **av, char **env)
 {
 	t_pipex	*pipex;
-
 	(void)ac;
 	(void)av;
 	pipex = init_pipex();

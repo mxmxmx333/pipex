@@ -6,7 +6,7 @@
 #    By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 12:08:46 by mbonengl          #+#    #+#              #
-#    Updated: 2024/08/05 16:28:32 by mbonengl         ###   ########.fr        #
+#    Updated: 2024/08/14 13:58:44 by mbonengl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,16 +52,9 @@ SRC 		:= 	$(SRC_DIR)/ft_isdigit.c \
 				$(SRC_DIR)/ft_split.c \
 				$(SRC_DIR)/ft_strlen.c \
 				$(SRC_DIR)/ft_tolower.c \
-				$(SRC_DIR)/ft_lstnew_bonus.c \
-				$(SRC_DIR)/ft_lstadd_front_bonus.c \
-				$(SRC_DIR)/ft_lstsize_bonus.c \
-				$(SRC_DIR)/ft_lstdelone_bonus.c \
-				$(SRC_DIR)/ft_lstlast_bonus.c \
-				$(SRC_DIR)/ft_lstadd_back_bonus.c \
-				$(SRC_DIR)/ft_lstclear_bonus.c \
-				$(SRC_DIR)/ft_lstiter_bonus.c \
-				$(SRC_DIR)/ft_lstmap_bonus.c \
-				$(SRC_DIR)/ft_countwords.c
+				$(SRC_DIR)/ft_countwords.c \
+				$(SRC_DIR)/get_next_line.c \
+				$(SRC_DIR)/get_next_line_utils.c
 OBJ 		:=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: ${NAME}
@@ -84,4 +77,4 @@ clean:
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

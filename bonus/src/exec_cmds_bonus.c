@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmds.c                                        :+:      :+:    :+:   */
+/*   exec_cmds_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:44:52 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/08 17:54:59 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/14 15:28:51 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
-void	exec_in(t_pipex *pipex, int pipe_fd[2], int in_out[2], char **envp)
+/* void	exec_in(t_pipex *pipex, int pipe_fd[2], int in_out[2], char **envp)
 {
 	close(pipe_fd[0]);
 	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
@@ -69,4 +69,4 @@ void	exec_cmds(t_pipex *pipex, char **envp)
 		exec_out(pipex, pipe_fd, in_out, envp);
 	close_all(pipe_fd, in_out);
 	exit_p(pipex, 0);
-}
+} */
