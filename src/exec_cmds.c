@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 12:44:52 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/08 17:54:59 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:18:38 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,14 @@ void	exec_cmds(t_pipex *pipex, char **envp)
 		return (perror("fork failed"), exit_p(pipex, 1));
 	else if (pid == 0)
 		exec_in(pipex, pipe_fd, in_out, envp);
-	else if (pid > 0)
+	pid = fork();
+	if (pid == -1)
+		return (perror("fork failed"), exit_p(pipex, 1));
+	else if (pid == 0)
 		exec_out(pipex, pipe_fd, in_out, envp);
+	int exit;
+	wait(&exit);
+	wait(NULL);
 	close_all(pipe_fd, in_out);
 	exit_p(pipex, 0);
 }

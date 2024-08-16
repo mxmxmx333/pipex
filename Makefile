@@ -6,7 +6,7 @@
 #    By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/05 10:57:59 by mbonengl          #+#    #+#              #
-#    Updated: 2024/08/14 15:29:10 by mbonengl         ###   ########.fr        #
+#    Updated: 2024/08/16 10:57:30 by mbonengl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ BSRC		:=	$(B_SRC_DIR)/main_bonus.c \
 				$(B_SRC_DIR)/deallocate_bonus.c \
 				$(B_SRC_DIR)/testing_bonus.c \
 				$(B_SRC_DIR)/check_files_bonus.c \
-				$(B_SRC_DIR)/exec_cmds_bonus.c
+				$(B_SRC_DIR)/exec_cmds_bonus.c \
+				$(B_SRC_DIR)/exec_helpers_bonus.c
 OBJ 		:= 	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 BOBJ		:=	$(BSRC:$(B_SRC_DIR)/%.c=$(B_OBJ_DIR)/%.o)
 

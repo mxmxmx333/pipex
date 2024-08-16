@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 14:40:52 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/15 19:39:34 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:45:25 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ void	get_env_paths(t_pipex *pipex, char **env)
 		ft_error(pipex, ERR_PATHS, NULL);
 }
 
-t_pipex	*init_pipex(void)
+t_pipex	*init_pipex(char **env)
 {
 	t_pipex	*pip;
 
 	pip = (t_pipex *)ft_calloc(1, sizeof(t_pipex));
 	if (!pip)
 		ft_error(pip, ERR_MALLOC, "init_pipex");
+	pip->env = env;
 	return (pip);
 }
 
@@ -48,7 +49,7 @@ t_pipex	*prepare_pipex(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	pipex = init_pipex();
+	pipex = init_pipex(env);
 	get_env_paths(pipex, env);
 	b_input_params(pipex, av, ac);
 	check_files(pipex);

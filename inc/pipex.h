@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:02:26 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/08 17:58:28 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:15:23 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "errors.h"
 # include "libft.h"
+# include <sys/wait.h> // waitpid
 # include <fcntl.h> // open, O_RDONLY, O_WRONLY, O_CREAT, O_TRUNC
 # include <unistd.h> // write, close, fork, execve, pipe, dup2, access, open
 

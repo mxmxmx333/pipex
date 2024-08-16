@@ -6,29 +6,47 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 16:19:39 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/15 19:41:33 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:02:44 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
+static int input_file(t_pipex *pipex, char **av)
+{
+	int	i; 
+
+	i = 2;
+	pipex->inf = ft_strdup(av[1]);
+	if (!pipex->inf)
+		return (ft_error(pipex, ERR_MALLOC, NULL), 0);
+	if (ft_strcmp(pipex->inf, "here_doc") == 0)
+	{
+		pipex->limiter = ft_strdup(av[2]);
+		if (!pipex->limiter)
+			return (ft_error(pipex, ERR_MALLOC, NULL), 0);
+		i++;
+	}
+	return (i);
+}
+
 int	b_input_params(t_pipex *pipex, char **av, int ac)
 {
 	int	i;
+	int rev_offs;
 
-	i = 1;
-	
-	pipex->inf = ft_strdup(av[1]);
-	pipex->cmds = (char ***)ft_calloc(ac - 2, sizeof(char **));
-	if (!pipex->inf || !pipex->cmds)
+	rev_offs = input_file(pipex, av);
+	i = rev_offs - 1;
+	pipex->cmds = (char ***)ft_calloc(ac - rev_offs + 1, sizeof(char **));
+	if (!pipex->cmds)
 		return (ft_error(pipex, ERR_MALLOC, NULL), 0);
 	while (++i <= ac - 2)
 	{
-		pipex->cmds[i - 2] = ft_split(av[i], ' ');
-		if (!pipex->cmds[i - 2])
+		pipex->cmds[i - rev_offs] = ft_split(av[i], ' ');
+		if (!pipex->cmds[i - rev_offs])
 			return (ft_error(pipex, ERR_MALLOC, NULL), 0);
 	}
-	pipex->cmd_p = ft_calloc(ac - 2, sizeof(char *));
+	pipex->cmd_p = ft_calloc(ac - rev_offs, sizeof(char *));
 	pipex->outf = ft_strdup(av[ac - 1]);
 	if (!pipex->inf || !pipex->outf || !pipex->cmd_p)
 		return (ft_error(pipex, ERR_MALLOC, NULL), 0);
@@ -37,10 +55,13 @@ int	b_input_params(t_pipex *pipex, char **av, int ac)
 
 int	check_files(t_pipex *pipex)
 {
-	if (access(pipex->inf, F_OK) == -1)
-		return (ft_error(pipex, ERR_NO_FILE, pipex->inf), 0);
-	if (access(pipex->inf, R_OK) == -1)
-		return (ft_error(pipex, ERR_NO_READ, pipex->inf), 0);
+	if (ft_strcmp(pipex->inf, "here_doc"))
+	{
+		if (access(pipex->inf, F_OK) == -1)
+			return (ft_error(pipex, ERR_NO_FILE, pipex->inf), 0);
+		if (access(pipex->inf, R_OK) == -1)
+			return (ft_error(pipex, ERR_NO_READ, pipex->inf), 0);
+	}
 	if (access(pipex->outf, F_OK) == -1)
 		return (ft_error(pipex, ERR_NO_FILE, pipex->outf), 0);
 	if (access(pipex->outf, W_OK) == -1)
@@ -49,7 +70,6 @@ int	check_files(t_pipex *pipex)
 }
 
 static int	check_command_path(t_pipex *pipex, char *cmd, int j)
-
 {
 	char	*temp;
 	int		i;

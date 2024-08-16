@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/04 17:51:04 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/16 09:49:17 by mbonengl         ###   ########.fr       */
+/*   Created: 2024/08/16 11:26:42 by mbonengl          #+#    #+#             */
+/*   Updated: 2024/08/16 11:27:16 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "libft.h"
 
-int main(int ac, char **av, char **env)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_pipex	*pipex;
-
-	if (ac != 5)
-		return (ft_error(NULL, ERR_WRONG_ARG, "(infile cmd1 cmd2 outfile)"), 1);
-	// Funtion that checks the input parameters, and returns a struct with the input parameters
-	pipex = prepare_pipex(ac, av, env);
-	exec_cmds(pipex, env);
-	exit_p(pipex, 0);
-	return (0);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

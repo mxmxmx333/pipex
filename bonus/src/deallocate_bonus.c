@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:10:00 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/15 19:02:48 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:56:22 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	exit_p(t_pipex *pipex, int status)
 {
 	if (pipex)
 	{
-		if (pipex->cmds)
-			ft_free_split_mother(pipex->cmds);
 		if (pipex->inf)
 			free(pipex->inf);
 		if (pipex->outf)
@@ -55,6 +53,10 @@ void	exit_p(t_pipex *pipex, int status)
 			ft_free_split(pipex->paths);
 		if (pipex->cmd_p)
 			ft_free_split(pipex->cmd_p);
+		if (pipex->limiter)
+			free(pipex->limiter);
+		if (pipex->cmds)
+			ft_free_split_mother(pipex->cmds);
 	}
 	free(pipex);
 	exit(status);

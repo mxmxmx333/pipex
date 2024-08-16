@@ -1,5 +1,2 @@
-I changed the Errors, the error function needs two strings 
-now and has to be corrected.
-The function for checking the commands should only use 
-the first array of the splitted string. 
-I need to find a way to check if the flags are valid.
+Ich muss mehrmals forken auch beim mandatory part. Alle execs brauchen einen child Prozess. 
+Here_doc muss in ein temporäres file reinschreiben. 
