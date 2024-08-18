@@ -20,7 +20,7 @@ int main(int ac, char **av, char **env)
 		return (ft_error(NULL, ERR_WRONG_ARG, "(infile cmd1 (...) cmdx outfile)"), 1);
 	// Funtion that checks the input parameters, and returns a struct with the input parameters
 	pipex = prepare_pipex(ac, av, env);
-	// exec_cmds(pipex, env);
+	exec_cmds(pipex);
 	exit_p(pipex, 0);
 	return (0);
 }

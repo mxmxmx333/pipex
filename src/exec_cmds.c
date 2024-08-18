@@ -12,6 +12,25 @@
 
 #include "pipex.h"
 
+int	open_files(t_pipex *pipex, int in_out[2])
+{
+	in_out[0] = open(pipex->inf, O_RDONLY);
+	if (in_out[0] == -1)
+		return (perror("open infile failed"), 1); 
+	in_out[1] = open(pipex->outf, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (in_out[1] == -1)
+		return (perror("open outfile failed"), 1);
+	return (0);
+}
+
+void	close_all(int pipe_fd[2], int in_out[2])
+{
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	close(in_out[0]);
+	close(in_out[1]);
+}
+
 void	exec_in(t_pipex *pipex, int pipe_fd[2], int in_out[2], char **envp)
 {
 	close(pipe_fd[0]);
@@ -38,26 +57,13 @@ void	exec_out(t_pipex *pipex, int pipe_fd[2], int in_out[2], char **envp)
 	execve(pipex->p2, pipex->cmd2, envp);
 }
 
-void	close_all(int pipe_fd[2], int in_out[2])
-{
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
-	close(in_out[0]);
-	close(in_out[1]);
-}
-
 void	exec_cmds(t_pipex *pipex, char **envp)
 {
 	int	pipe_fd[2];
 	int	in_out[2];
 	int	pid;
 
-	in_out[0] = open(pipex->inf, O_RDONLY);
-	if (in_out[0] == -1)
-		return (perror("open failed infile"), exit_p(pipex, 1));
-	in_out[1] = open(pipex->outf, O_WRONLY);
-	if (in_out[1] == -1)
-		return (perror("open failed: outfile"), exit_p(pipex, 1));
+	open_files(pipex, in_out);
 	if (pipe(pipe_fd) == -1)
 		return (perror("pipe failed"), exit_p(pipex, 1));
 	pid = fork();
@@ -65,13 +71,8 @@ void	exec_cmds(t_pipex *pipex, char **envp)
 		return (perror("fork failed"), exit_p(pipex, 1));
 	else if (pid == 0)
 		exec_in(pipex, pipe_fd, in_out, envp);
-	pid = fork();
-	if (pid == -1)
-		return (perror("fork failed"), exit_p(pipex, 1));
-	else if (pid == 0)
+	else
 		exec_out(pipex, pipe_fd, in_out, envp);
-	int exit;
-	wait(&exit);
 	wait(NULL);
 	close_all(pipe_fd, in_out);
 	exit_p(pipex, 0);

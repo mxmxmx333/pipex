@@ -14,7 +14,7 @@
 
 static int input_file(t_pipex *pipex, char **av)
 {
-	int	i; 
+	int	i;
 
 	i = 2;
 	pipex->inf = ft_strdup(av[1]);
@@ -40,12 +40,13 @@ int	b_input_params(t_pipex *pipex, char **av, int ac)
 	pipex->cmds = (char ***)ft_calloc(ac - rev_offs + 1, sizeof(char **));
 	if (!pipex->cmds)
 		return (ft_error(pipex, ERR_MALLOC, NULL), 0);
-	while (++i <= ac - 2)
+	while (++i < ac - 1)
 	{
 		pipex->cmds[i - rev_offs] = ft_split(av[i], ' ');
 		if (!pipex->cmds[i - rev_offs])
 			return (ft_error(pipex, ERR_MALLOC, NULL), 0);
 	}
+	pipex->cmds_count = i - rev_offs;
 	pipex->cmd_p = ft_calloc(ac - rev_offs, sizeof(char *));
 	pipex->outf = ft_strdup(av[ac - 1]);
 	if (!pipex->inf || !pipex->outf || !pipex->cmd_p)

@@ -12,6 +12,12 @@
 
 #include "pipex_bonus.h"
 
+int	fd_is_valid(int fd)
+{
+	char *buf;
+	return (read(fd, &buf, 0) == 0 || errno != EBADF);
+}
+
 void	ft_error(t_pipex *pipex, char *error, char *place)
 {
 	ft_putstr_fd(error, 2);

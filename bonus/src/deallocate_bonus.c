@@ -58,6 +58,7 @@ void	exit_p(t_pipex *pipex, int status)
 		if (pipex->cmds)
 			ft_free_split_mother(pipex->cmds);
 	}
+	close_all(pipex);
 	free(pipex);
 	exit(status);
 }

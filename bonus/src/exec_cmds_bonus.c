@@ -12,58 +12,73 @@
 
 #include "pipex_bonus.h"
 
-void	exec_in(t_pipex *pipex, int pipe_fd[2], int in_out[2])
+void	child(t_pipex *pipex, int i)
 {
-	close(pipe_fd[0]);
-	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
-		return (perror("in: dup2 failed"), exit_p(pipex, 1));
-	close(pipe_fd[1]);
-	if (dup2(in_out[0], STDIN_FILENO) == -1)
-		return (perror("in: dup2 failed"), exit_p(pipex, 1));
-	close(in_out[0]);
-	close(in_out[1]);
-	execve(pipex->cmd_p[0], pipex->cmds[0], pipex->env);
-	return (perror("execve failed"), exit_p(pipex, 1));
+	int	pid;
+	int	pipe_fd[2];
+
+	if (pipe(pipe_fd) == -1)
+		return (perror("pipe failed"), exit_p(pipex, 1));
+	pid = fork();
+	if (pid == -1)
+		return (perror("fork failed"), exit_p(pipex, 1));
+	else if (pid > 0)
+	{
+		close(pipe_fd[1]);
+		if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
+			return (perror("dup2 failed"), exit_p(pipex, 1));
+		close(pipe_fd[0]);
+	}
+	else
+	{
+		close (pipe_fd[0]);
+		if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
+			return (perror("dup2 failed"), exit_p(pipex, 1));
+		close(pipe_fd[1]);
+		execve(pipex->cmd_p[i], pipex->cmds[i], pipex->env);
+		printf("execve failed i: %d\n", i);
+		return (perror("execve failed"), exit_p(pipex, 1));
+	}
 }
 
-void	exec_middle(t_pipex *pipex, int pipe_fd[2], int in_out[2], int i)
+static void	ft_pipex(t_pipex *pipex)
 {
-	close(pipe_fd[0]);
-	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
-		return (perror("middle: dup2 failed"), exit_p(pipex, 1));
-	close(pipe_fd[1]);
-	if (dup2(in_out[1], STDIN_FILENO) == -1)
-		return (perror("middle: dup2 failed"), exit_p(pipex, 1));
-	close(in_out[1]);
-	if (dup2(in_out[0], STDOUT_FILENO) == -1)
-		return (perror("middle: dup2 failed"), exit_p(pipex, 1));
-	close(in_out[0]);
-	execve(pipex->cmd_p[i], pipex->cmds[i], pipex->env);
-	return (perror("execve failed"), exit_p(pipex, 1));
+	int		i;
+
+	i = -1;
+	while (++i < pipex->cmds_count - 1)
+		child(pipex, i);
+	while (wait(NULL) > 0)
+		;
 }
 
-void	exec_out(t_pipex *pipex, int pipe_fd[2], int in_out[2], int i)
+void	exec_cmds(t_pipex *pipex)
 {
-	close(pipe_fd[1]);
-	if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
-		return (perror("out: dup2 failed"), exit_p(pipex, 1));
-	close (pipe_fd[0]);
-	if (dup2(in_out[1], STDOUT_FILENO) == -1)
-		return (perror("out: dup2 failed"), exit_p(pipex, 1));
-	close (in_out[1]);
-	close (in_out[0]);
-	execve(pipex->cmd_p[i], pipex->cmds[i], pipex->env);
-	return (perror("execve failed"), exit_p(pipex, 1));
+	//here_doc(pipex);
+	pipex->in_out[0] = open(pipex->inf, O_RDONLY);
+	if (pipex->in_out[0] == -1)
+		return (perror("open failed"), exit_p(pipex, 1));
+	dup2(pipex->in_out[0], STDIN_FILENO);
+	close(pipex->in_out[0]);
+	ft_pipex(pipex);
+	// char buf[10];
+	// read(STDIN_FILENO, &buf, 10);
+	open_out(pipex);
+	if (dup2(pipex->in_out[1], STDOUT_FILENO) == -1)
+		return (perror("dup2 fail"), exit_p(pipex, 1));
+	close(pipex->in_out[1]);
+	execve(pipex->cmd_p[pipex->cmds_count - 1], pipex->cmds[pipex->cmds_count - 1], pipex->env);
+	exit_p(pipex, 0);
 }
 
-char	*readline(char *prompt)
+/* char	*readline(char *prompt)
 {
 	char	*line;
 
 	line = get_next_line(STDIN_FILENO);
 	return (line);
-}
-
+} */
+/* 
 int here_doc(t_pipex *pipex, int pipe_fd[2])
 {
 	char	*line;
@@ -88,24 +103,4 @@ int here_doc(t_pipex *pipex, int pipe_fd[2])
 		return (1);
 	}
 	return (0);
-}
-
-void	exec_cmds(t_pipex *pipex, char **envp)
-{
-	int	pipe_fd[2];
-	int	in_out[2];
-	int	pid;
-
-	open_files(pipex, in_out);
-	if (pipe(pipe_fd) == -1)
-		return (perror("pipe failed"), exit_p(pipex, 1));
-	pid = fork();
-	if (pid == -1)
-		return (perror("fork failed"), exit_p(pipex, 1));
-	else if (pid == 0)
-		exec_in(pipex, pipe_fd, in_out);
-	else if (pid > 0)
-		exec_out(pipex, pipe_fd, in_out, envp);
-	close_all(pipe_fd, in_out);
-	exit_p(pipex, 0);
-}
+} */
