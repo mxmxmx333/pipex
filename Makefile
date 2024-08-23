@@ -12,7 +12,7 @@
 
 Name 		:= 	pipex
 CFLAGS 		:= 	-g -I./inc -I./libft/inc -Wall -Wextra -Werror
-BFLAGS		:= 	-g -I./bonus/inc
+BFLAGS		:= 	-I./bonus/inc 
 LDFLAGS		:= 	-L./libft -lft
 CC 			:= 	clang
 SRC_DIR 	:= 	./src

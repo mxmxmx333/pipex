@@ -29,7 +29,7 @@ void	get_env_paths(t_pipex *pipex, char **env)
 		i++;
 	}
 	if (!pipex->paths)
-		ft_error(pipex, ERR_PATHS, NULL);
+		ft_error(pipex, ERR_PATHS, NULL, 1);
 }
 
 t_pipex	*init_pipex(char **env)
@@ -38,7 +38,7 @@ t_pipex	*init_pipex(char **env)
 
 	pip = (t_pipex *)ft_calloc(1, sizeof(t_pipex));
 	if (!pip)
-		ft_error(pip, ERR_MALLOC, "init_pipex");
+		ft_error(pip, ERR_MALLOC, "init_pipex", 1);
 	pip->env = env;
 	return (pip);
 }
@@ -52,7 +52,7 @@ t_pipex	*prepare_pipex(int ac, char **av, char **env)
 	pipex = init_pipex(env);
 	get_env_paths(pipex, env);
 	b_input_params(pipex, av, ac);
-	check_files(pipex);
+	// check_files(pipex);
 	check_commands(pipex);
 	ft_putstr_fd("pipex initialized\n", 1);
 	print_pipex_struct(pipex);

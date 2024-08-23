@@ -31,11 +31,11 @@ typedef struct s_pipex
 	char	**env;
 	int		cmds_count;
 	int		in_out[2];
-	int		*pipe_fds[2];
+	int		pipe_fds[2];
 }	t_pipex;
 
 /* ----------------- error handling ------------------*/
-void	ft_error(t_pipex *pipex, char *error, char *place);
+void	ft_error(t_pipex *pipex, char *error, char *place, int status);
 int		check_files(t_pipex *pipex);
 int		b_input_params(t_pipex *pipex, char **av, int ac);
 int		check_commands(t_pipex *pipex);

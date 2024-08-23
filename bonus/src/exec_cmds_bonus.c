@@ -12,7 +12,7 @@
 
 #include "pipex_bonus.h"
 
-void	child(t_pipex *pipex, int i)
+void	child(t_pipex *pipex, int i, int status)
 {
 	int	pid;
 	int	pipe_fd[2];
@@ -28,6 +28,7 @@ void	child(t_pipex *pipex, int i)
 		if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
 			return (perror("dup2 failed"), exit_p(pipex, 1));
 		close(pipe_fd[0]);
+		waitpid(pid, &status, 0);
 	}
 	else
 	{
@@ -36,31 +37,52 @@ void	child(t_pipex *pipex, int i)
 			return (perror("dup2 failed"), exit_p(pipex, 1));
 		close(pipe_fd[1]);
 		execve(pipex->cmd_p[i], pipex->cmds[i], pipex->env);
-		printf("execve failed i: %d\n", i);
-		return (perror("execve failed"), exit_p(pipex, 1));
+		return (perror("execve failed"), exit_p(pipex, 127));
 	}
 }
 
-static void	ft_pipex(t_pipex *pipex)
+static void	ft_pipex(t_pipex *pipex, int status)
 {
 	int		i;
 
 	i = -1;
 	while (++i < pipex->cmds_count - 1)
-		child(pipex, i);
-	while (wait(NULL) > 0)
-		;
+		child(pipex, i, status);
+	// while (wait(NULL) > 0)
+	// 	;
 }
 
+void	open_in(t_pipex *pipex)
+{
+	if (access(pipex->inf, F_OK) == -1)
+	{
+		perror(pipex->inf);
+		pipex->in_out[0] = 0;
+		return ;
+	}
+	// if (access(pipex->inf, R_OK) == -1)
+	// {
+	// 	perror(pipex->inf);
+	// 	pipex->in_out[0] = 	open("dev/null", O_RDONLY);
+	// 	if (pipex->in_out[0] == -1)
+	// 		return (perror("dev/null"), exit_p(pipex, 1));
+	// 	return ;
+	// }
+	else 
+	pipex->in_out[0] = open(pipex->inf, O_RDONLY);
+	if (pipex->in_out[0] == -1)
+		perror(pipex->inf);
+}
 void	exec_cmds(t_pipex *pipex)
 {
 	//here_doc(pipex);
-	pipex->in_out[0] = open(pipex->inf, O_RDONLY);
-	if (pipex->in_out[0] == -1)
-		return (perror("open failed"), exit_p(pipex, 1));
+	int	status;
+
+	status = 0;
+	open_in(pipex);
 	dup2(pipex->in_out[0], STDIN_FILENO);
 	close(pipex->in_out[0]);
-	ft_pipex(pipex);
+	ft_pipex(pipex, status);
 	// char buf[10];
 	// read(STDIN_FILENO, &buf, 10);
 	open_out(pipex);
@@ -68,7 +90,7 @@ void	exec_cmds(t_pipex *pipex)
 		return (perror("dup2 fail"), exit_p(pipex, 1));
 	close(pipex->in_out[1]);
 	execve(pipex->cmd_p[pipex->cmds_count - 1], pipex->cmds[pipex->cmds_count - 1], pipex->env);
-	exit_p(pipex, 0);
+	exit_p(pipex, status);
 }
 
 /* char	*readline(char *prompt)

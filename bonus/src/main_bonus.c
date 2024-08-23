@@ -17,7 +17,7 @@ int main(int ac, char **av, char **env)
 	t_pipex	*pipex;
 
 	if (ac < 5)
-		return (ft_error(NULL, ERR_WRONG_ARG, "(infile cmd1 (...) cmdx outfile)"), 1);
+		return (ft_error(NULL, ERR_WRONG_ARG, "(infile cmd1 (...) cmdx outfile)", 0), 1);
 	// Funtion that checks the input parameters, and returns a struct with the input parameters
 	pipex = prepare_pipex(ac, av, env);
 	exec_cmds(pipex);

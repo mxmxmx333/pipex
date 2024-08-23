@@ -1,11 +1,15 @@
-NIKOLA IS 
-
-SOS 
-SO SO SO
-
-SO 
-SO
-SO 
-IN 
-LOVE
-WITH MILASKA
+42_pipex_tester
+bonus
+inc
+last_err_log.txt
+libft
+Makefile
+obj
+outfile
+outfiles
+outfile.txt
+output.txt
+pipex
+src
+to do list.txt
+txt.txt
