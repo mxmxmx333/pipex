@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   errors_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:06:20 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/07 10:14:17 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:15:47 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#ifndef ERRORS_BONUS_H
+# define ERRORS_BONUS_H
 
-# define ERR_WRONG_ARG "Error: Wrong number of arguments "
-# define ERR_NO_FILE "Error: No such file or directory: "
-# define ERR_NO_READ "Error: >Read permission< denied: "
-# define ERR_NO_WRITE "Error: >Write permission< denied: "
-# define ERR_NO_EXEC "Error: >Execute permission< denied: "
-# define ERR_CMD_NOT_FOUND "Error: command not found: "
-# define ERR_PIPE "Error: Pipe failed "
-# define ERR_FORK "Error: Fork failed "
-# define ERR_DUP2 "Error: Dup2 failed "
-# define ERR_EXECVE "Error: Execve failed "
-# define ERR_OPEN "Error: Open failed "
-# define ERR_CLOSE "Error: Close failed "
-# define ERR_MALLOC "Error: Malloc failed "
-# define ERR_PATHS "Failed to get PATH "
+# define ERR_WRONG_ARG "Error: Wrong number of arguments \n"
+# define ERR_NO_FILE "Error: No such file or directory: \n"
+# define ERR_NO_READ "Error: >Read permission< denied: \n"
+# define ERR_NO_WRITE "Error: >Write permission< denied: \n"
+# define ERR_NO_EXEC "Error: >Execute permission< denied: \n"
+# define ERR_CMD_NOT_FOUND "Error: Command not found"
+# define ERR_PIPE "Error: Pipe failed \n"
+# define ERR_FORK "Error: Fork failed \n"
+# define ERR_DUP2 "Error: Dup2 failed \n"
+# define ERR_EXECVE "Error: Execve failed \n"
+# define ERR_OPEN "Error: Open failed \n"
+# define ERR_CLOSE "Error: Close failed \n"
+# define ERR_MALLOC "Error: Malloc failed \n"
+# define ERR_PATHS "Failed to get PATH \n"
+# define USAGE "Usage:	./pipex file1 cmd1 (...) cmd2 file2 \n\
+	./pipex here_doc LIMITER cmd1 (...) cmd2 file2\n"
 
 #endif

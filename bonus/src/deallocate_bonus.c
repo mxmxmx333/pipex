@@ -6,12 +6,11 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 15:10:00 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/16 11:56:22 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:00:29 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
 
 static void	ft_free_split(char **split)
 {
@@ -45,24 +44,22 @@ void	exit_p(t_pipex *pipex, int status)
 {
 	if (pipex)
 	{
-		if (pipex->inf)
-			free(pipex->inf);
 		if (pipex->outf)
 			free(pipex->outf);
 		if (pipex->paths)
 			ft_free_split(pipex->paths);
-		if (pipex->cmd_p)
-			ft_free_split(pipex->cmd_p);
 		if (pipex->limiter)
+		{
+			if (ft_strcmp(pipex->inf, "here_doc"))
+				unlink(pipex->inf);
 			free(pipex->limiter);
+		}
+		if (pipex->inf)
+			free(pipex->inf);
 		if (pipex->cmds)
 			ft_free_split_mother(pipex->cmds);
 	}
 	if (pipex)
-	{
-		close_all(pipex);
 		free(pipex);
-	}
-	
 	exit(status);
 }

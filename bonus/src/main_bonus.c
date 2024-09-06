@@ -6,21 +6,21 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/04 17:51:04 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/16 11:24:53 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:48:19 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	t_pipex	*pipex;
+	int		status;
 
-	if (ac < 5)
-		return (ft_error(NULL, ERR_WRONG_ARG, "(infile cmd1 (...) cmdx outfile)", 0), 1);
-	// Funtion that checks the input parameters, and returns a struct with the input parameters
+	if (ac < 5 || (ac < 6 && !ft_strcmp(av[1], "here_doc")))
+		return (ft_putstr_fd(ERR_WRONG_ARG, 2), ft_putstr_fd(USAGE, 2), 2);
 	pipex = prepare_pipex(ac, av, env);
-	exec_cmds(pipex);
-	exit_p(pipex, 0);
-	return (0);
+	status = exec_cmds(pipex);
+	exit_p(pipex, status);
+	return (status);
 }

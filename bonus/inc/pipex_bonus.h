@@ -6,12 +6,12 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:02:26 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/16 12:14:53 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/09/06 16:07:13 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H_BONUS
-# define PIPEX_H_BONUS
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 # include "errors_bonus.h" // error messages
 # include "errno.h" // ernno
@@ -27,36 +27,40 @@ typedef struct s_pipex
 	char	*outf;
 	char	*limiter;
 	char	**paths;
-	char	**cmd_p;
 	char	**env;
+	char	*exec_path;
 	int		cmds_count;
 	int		in_out[2];
-	int		pipe_fds[2];
+	int		last_pid;
 }	t_pipex;
 
-/* ----------------- error handling ------------------*/
+/* ------------------------- error handling --------------------------*/
 void	ft_error(t_pipex *pipex, char *error, char *place, int status);
-int		check_files(t_pipex *pipex);
-int		b_input_params(t_pipex *pipex, char **av, int ac);
-int		check_commands(t_pipex *pipex);
+void	errmsg(t_pipex *pipex, char *error, char *place);
+char	**emptystr(void);
 
-/* --------------------- memory ----------------------*/
+/* ----------------------------- memory ------------------------------*/
 void	exit_p(t_pipex *pipex, int status);
 int		fd_is_valid(int fd);
 
-/* ---------------------- init -----------------------*/
+/* ------------------------------ init -------------------------------*/
+t_pipex	*prepare_pipex(int ac, char **av, char **env);
 void	get_env_paths(t_pipex *pipex, char **env);
 t_pipex	*init_pipex(char **env);
-t_pipex	*prepare_pipex(int ac, char **av, char **env);
+int		b_input_params(t_pipex *pipex, char **av, int ac);
 
-/* --------------------- execute ---------------------*/
-void	exec_cmds(t_pipex *pipex);
+/* ----------------------------- execute -----------------------------*/
+int		exec_cmds(t_pipex *pipex);
 
-/* ------------------- exec helpers ------------------*/
-void	close_all(t_pipex *pipex);
-int		open_out(t_pipex *pipex);
+/* --------------------------- exec helpers --------------------------*/
+void	open_out(t_pipex *pipex);
+void	open_dup_in(t_pipex *pipex, int fd[2]);
+void	open_dup_out(t_pipex *pipex);
+char	*get_command_path(t_pipex *pipex, int i);
+void	close_two(int fd[2], int i);
 
-/* ---------------------- test -----------------------*/
-void	print_pipex_struct(t_pipex *pipex);
+/* --------------------------- here_doc ------------------------------*/
+void	gen_filename_heredoc(t_pipex *pipex);
+void	gen_here_doc(t_pipex *pipex);
 
 #endif

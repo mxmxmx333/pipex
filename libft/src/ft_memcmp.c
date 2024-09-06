@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:39:36 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/04/21 15:20:08 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/25 15:22:38 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (*ptr1 - *ptr2);
 }
-/*
-int	main(void)
-{
-	printf("%d",ft_memcmp("zyxbcdefgh", "abcdefgxyz", 0));
-	return (0);
-}
-*/

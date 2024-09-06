@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:36:31 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/05/04 17:05:10 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/25 13:38:38 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*get_next_line(int fd)
 	char			*current_line;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
-		return (NULL);
+		return ((lstclear(&b_list)), NULL);
 	if (copycontent(fd, &b_list) == -1)
 		return (lstclear(&b_list), NULL);
 	if (!b_list)

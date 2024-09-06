@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 16:25:54 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/08/05 20:04:12 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/25 14:52:41 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_countwords_delim(char const *s, char c)
 	return (words);
 }
 
-int ft_countwords_whitespace(char const *s)
+int	ft_countwords_whitespace(char const *s)
 {
 	int	words;
 	int	i;

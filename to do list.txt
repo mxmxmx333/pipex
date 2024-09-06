@@ -1,2 +1,0 @@
-Ich muss mehrmals forken auch beim mandatory part. Alle execs brauchen einen child Prozess. 
-Here_doc muss in ein temporäres file reinschreiben. 

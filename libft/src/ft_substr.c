@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/07 21:55:30 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/04/21 15:20:00 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/25 15:22:10 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_strlcpy(substring, s + start, len + 1);
 	return (substring);
 }
-
-/*
-int main(void)
-{
-	char	*ret;
-
-	ret = ft_substr("01234", 4294967294, 0);
-	printf("%s\n", ret);
-	//printf("%d", ft_strncmp(ret, "", 1));
-}
-*/

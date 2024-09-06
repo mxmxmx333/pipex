@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:15:20 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/04/21 15:16:15 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/25 15:22:31 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,3 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (i);
 }
-/*
-int main()
-{
-	t_list *test = ft_lstnew((void *)"testtest");
-
-	ft_lstadd_front(&test, ft_lstnew("abc"));
-	ft_lstadd_front(&test, ft_lstnew("123"));
-	ft_lstadd_front(&test, ft_lstnew("&=="));
-	printf("%d", ft_lstsize(test));
-	return 0;
-}
-*/

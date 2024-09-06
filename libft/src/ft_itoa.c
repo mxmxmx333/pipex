@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 12:50:32 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/04/21 14:58:12 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/25 15:22:27 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,3 @@ char	*ft_itoa(int n)
 	}
 	return (array);
 }
-/*
-int	main(int argc, char **argv)
-{
-	printf("%s\n", ft_itoa(atoi(argv[1])));
-	return (0);
-}
-*/

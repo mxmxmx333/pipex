@@ -6,11 +6,11 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 10:50:48 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/09/06 16:15:27 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:02:42 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex_bonus.h"
+#include "pipex.h"
 
 void	close_two(int fd[2], int i)
 {

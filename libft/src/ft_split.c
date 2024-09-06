@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 15:31:29 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/04/19 17:11:28 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/25 15:22:45 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,3 @@ char	**ft_split(char const *s, char c)
 	split = split_words(s, c, split);
 	return (split);
 }
-/*
-int	main(void)
-{
-	char **split;
-	char *str = "                  olol   ";
-
-	split = ft_split(str, ' ');
-	while (*split)
-	{
-		printf("%s\n", *split);
-		split++;
-	}
-}
-*/

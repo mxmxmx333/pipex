@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:49:43 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/04/21 14:36:30 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/25 15:23:02 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,3 @@ char	*ft_strtrim(char const *str, char const *set)
 	ft_strlcpy(trimmed, str + start, totallen);
 	return (trimmed);
 }
-
-/*
-int	main(void)
-{
-	char	*s1 = "xxxkkkkkkkxxx";
-	char	*s2 = "x";
-	char 	*trimmed = ft_strtrim(s1, s2);
-	printf("Strimtrim: %s\n", trimmed);
-	free(trimmed);
-	return (0);
-}
-*/

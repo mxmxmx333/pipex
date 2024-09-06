@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 14:36:29 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/05/04 18:31:45 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/25 13:33:44 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	setupnext(t_list **b_list, char *n_buff)
 	}
 	free((*b_list)->str);
 	(*b_list)->str = n_buff;
+	if ((*b_list)->str[0] == '\0')
+		lstclear(b_list);
 }
 
 size_t	getlinelen(t_list *b_list)

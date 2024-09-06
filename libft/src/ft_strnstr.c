@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 17:58:09 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/04/19 16:48:10 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/08/25 15:22:57 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,3 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (NULL);
 }
-
-/*
-int	main(int argc, char **argv)
-{
-	//printf("   strnstr: %s\n", strnstr(argv[1], argv[2], atoi(argv[3])));
-	printf("ft_strnstr: %s\n", ft_strnstr(argv[1], argv[2], atoi(argv[3])));
-}
-*/
