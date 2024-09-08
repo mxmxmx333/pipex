@@ -6,7 +6,7 @@
 #    By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/04 12:08:46 by mbonengl          #+#    #+#              #
-#    Updated: 2024/08/25 15:12:07 by mbonengl         ###   ########.fr        #
+#    Updated: 2024/09/08 10:38:31 by mbonengl         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SRC 		:= 	$(SRC_DIR)/ft_atoi.c \
 				$(SRC_DIR)/ft_tolower.c \
 				$(SRC_DIR)/ft_toupper.c \
 				$(SRC_DIR)/get_next_line.c \
-				$(SRC_DIR)/get_next_line_utils.c
+				$(SRC_DIR)/get_next_line_utils.c \
+				$(SRC_DIR)/empty_white.c
 
 OBJ 		:=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

@@ -6,7 +6,7 @@
 /*   By: mbonengl <mbonengl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 14:40:52 by mbonengl          #+#    #+#             */
-/*   Updated: 2024/09/06 18:48:55 by mbonengl         ###   ########.fr       */
+/*   Updated: 2024/09/08 10:44:53 by mbonengl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	b_input_params(t_pipex *pipex, char **av, int ac)
 		return (ft_error(pipex, ERR_MALLOC, NULL, 1), 1);
 	while (++i < ac - 1)
 	{
-		if (av[i][0] == '\0')
+		if (str_is_empty(av[i]))
 			pipex->cmds[i - rev_offs] = emptystr();
 		else
 			pipex->cmds[i - rev_offs] = ft_split(av[i], ' ');
